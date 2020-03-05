@@ -12,7 +12,7 @@ public class JwtTokenFilterConfigurer extends SecurityConfigurerAdapter<DefaultS
   public JwtTokenFilterConfigurer(JwtTokenProvider jwtTokenProvider) {
     this.jwtTokenProvider = jwtTokenProvider;
   }
-
+///configure  to related  JwtTokenFilter.java in main app
   @Override
   public void configure(HttpSecurity http) throws Exception {
     JwtTokenFilter customFilter = new JwtTokenFilter(jwtTokenProvider);

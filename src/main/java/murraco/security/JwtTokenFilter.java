@@ -25,11 +25,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     this.jwtTokenProvider = jwtTokenProvider;
   }
 
+
+  ///rôles doFilterInternal take res , req before reloading page and test
+  /// if request has header with 'Authorization berer token' and checke if token is valide done! else show error
   @Override
   protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    ///resolveToken checke there are Authorization or not and return token
     String token = jwtTokenProvider.resolveToken(httpServletRequest);
     try {
+      //  validateToken(token)  checke toke is valide( containt Header Payload Signature)  or not
+
       if (token != null && jwtTokenProvider.validateToken(token)) {
+        //getAuthentication (token) take token and change token to value= username and check if user is exsit in data base or not
         Authentication auth = jwtTokenProvider.getAuthentication(token);
         SecurityContextHolder.getContext().setAuthentication(auth);
       }
